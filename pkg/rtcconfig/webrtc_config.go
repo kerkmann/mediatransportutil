@@ -319,6 +319,11 @@ done:
 		}
 	}
 
+	if len(rtcConf.NATMappingOverride) > 0 {
+		logger.Infow("Override NAT mapping", "natMappingOverride", rtcConf.NATMappingOverride)
+		natMapping = append(natMapping, rtcConf.NATMappingOverride)
+	}
+
 	nat1to1IPs := make([]string, 0, len(natMapping))
 	for external, local := range natMapping {
 		nat1to1IPs = append(nat1to1IPs, fmt.Sprintf("%s/%s", external, local))
